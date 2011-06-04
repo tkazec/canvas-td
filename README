@@ -1,4 +1,6 @@
-A fully featured tower defense game built with <canvas>.
+A fully featured tower defense game built with <canvas>. http://tkazec.github.com/canvas-td/
+
+Should work in Chrome, Safari ≥ 5, Firefox ≥ 3.6, IE ≥ 9, and Opera. Embed with <iframe src="http://tkazec.github.com/canvas-td/" width="820" height="580" style="border:none"></iframe>.
 
 
 Copyright (c) 2011 Teddy Cross

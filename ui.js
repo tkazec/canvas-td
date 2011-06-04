@@ -28,15 +28,19 @@ ui.handleshortcuts = function(e){
 				e.shiftKey && game.selection && ui.action.sell(); break;
 			}
 			case 27: {
-				game.selection ? ui.action.deselect() : game.pause(); break;
+				game.selection ? ui.action.deselect() : (game.pause(), (ui.id("control-pause").innerText = "Start")); break;
 			}
 			case 13: {
 				game._wave = game.ticks - 1200; break;
 			}
 		}
 	} else {
-		e.keyCode === 27 && game.start();
+		e.keyCode === 27 && (ui.id("control-pause").innerText = "Pause") && game.start();
 	}
+};
+
+ui.handleunload = function(e){
+	return "A game is currently running, are you sure you want to close it?";
 };
 
 
@@ -95,7 +99,7 @@ ui.action.upgrade = function(stat){
 };
 
 ui.action.move = function(){
-	if (game.cash - 800 >= 0) {
+	if (game.cash - 90 >= 0) {
 		var turret = game.selection.turret;
 		
 		game.selection = {
@@ -196,7 +200,8 @@ ui.id("pages-canvas").addEventListener("click", function(e){
 		tile = game.tiles[Math.ceil((e.pageX - this.offsetLeft) / 5) + "," + Math.ceil((e.pageY - this.offsetTop) / 5)];
 	
 	if (selection.status === "moving") {
-		if (selection.placeable) {
+		if (selection.placeable && game.cash - 90 >= 0) {
+			game.cash -= 90;
 			game.turrets[turret.id] = turret;
 			
 			var tx = (turret.x + 2.5) / 5, ty = (turret.y + 2.5) / 5;
@@ -257,7 +262,7 @@ ui.id("control-timer").addEventListener("click", function(e){
 }, false);
 
 ui.id("control-pause").addEventListener("click", function(){
-	game[game.paused ? "start" : "pause"]();
+	this.innerText = game.paused ? (game.start(), "Pause") : (game.pause(), "Start");
 }, false);
 
 ui.id("control-reset").addEventListener("click", function(){
@@ -300,6 +305,7 @@ ui.bind("click", ui.id("pages-start-maps").children, function(){
 	});
 	
 	document.addEventListener("keydown", ui.handleshortcuts, false);
+	window.addEventListener("beforeunload", ui.handleunload, false);
 	
 	game.start();
 	ui.panel("turrets");

@@ -172,6 +172,7 @@ var game = this.game = {
 	end: function(){
 		game.pause();
 		document.removeEventListener("keydown", ui.handleshortcuts, false);
+		window.removeEventListener("beforeunload", ui.handleunload, false);
 		
 		var map = game.map.name,
 			kills = game.kills,
@@ -191,7 +192,7 @@ var game = this.game = {
 		
 		ui.id("control-score-text").textContent = text;
 		ui.id("control-score-tweet").setAttribute("href",
-			"https://twitter.com/?status=" + window.encodeURIComponent("I scored " + text + " on " + map + " in #canvastd"));
+			"https://twitter.com/?status=" + window.encodeURIComponent("I scored " + text + " on " + map + " in #canvastd http://tkazec.github.com/canvas-td/"));
 		
 		ui.panel("score");
 		ui.id("pages-overlay").style.display = "block";
