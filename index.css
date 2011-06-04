@@ -1,0 +1,237 @@
+/*** reset ***/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{background:transparent;border:0;font-size:100%;margin:0;outline:0;padding:0;vertical-align:baseline}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{background:transparent;font-size:100%;margin:0;padding:0;vertical-align:baseline}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{border:0;border-top:1px solid #ccc;display:block;height:1px;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+
+/*** global ***/
+a {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	color: blue;
+	cursor: pointer;
+	text-decoration: none;
+	user-select: none;
+}
+
+body {
+	-moz-box-shadow: 0 0 10px #000;
+	-webkit-box-shadow: 0 0 10px #000;
+	box-shadow: 0 0 10px #000;
+	display: inline-block;
+	margin: 5px;
+}
+body, kbd {
+	font: 12px "Droid Sans Mono", monospace;
+}
+
+dt {
+	clear: left;
+	float: left;
+	width: 50px;
+}
+dd {
+	float: left;
+}
+
+h2, h3 {
+	font-weight: normal;
+}
+h2 {
+	margin-bottom: 10px;
+}
+h3 {
+	text-align: center;
+}
+
+p {
+	margin-bottom: 30px;
+}
+
+ul {
+	list-style: none;
+}
+
+
+/*** pages ***/
+#pages > * {
+	background-color: #FFF;
+	display: none;
+	position: absolute;
+}
+
+
+/*** start page ***/
+#pages-start {
+	display: block;
+	height: 450px;
+	padding: 50px;
+	width: 700px;
+}
+
+#pages-start-maps {
+	float: left;
+}
+#pages-start-maps > a {
+	display: block;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#pages-start-maps > a > img {
+	-moz-box-shadow: 0 0 5px #000;
+	-webkit-box-shadow: 0 0 5px #000;
+	box-shadow: 0 0 5px #000;
+	display: block;
+	height: 50px;
+	width: 80px;
+}
+
+#pages-start-info {
+	float: right;
+	height: 450px;
+	text-align: justify;
+	width: 350px;
+}
+#pages-start-links {
+	bottom: 5px;
+	position: absolute;
+}
+
+
+/*** overlay page ***/
+#pages-overlay {
+	height: 550px;
+	opacity: 0.3;
+	width: 800px;
+}
+
+
+/*** scores page ***/
+#pages-scores {
+	height: 550px;
+	width: 800px;
+	z-index: 1;
+}
+
+#pages-scores > h3, #pages-scores > ul {
+	display: inline-block;
+	margin: 5px 0;
+	padding: 0 10px;
+	vertical-align: top;
+	width: 245px; /* should be 246px */
+}
+
+#pages-scores > :nth-child(3n+2) {
+	border: solid #DDD;
+	border-width: 0 1px;
+	margin: 5px -7px;
+}
+
+#pages-scores > ul {
+	font-size: 10px;
+}
+
+#pages-scores > ul > li > a {
+	-o-text-overflow: ellipsis;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: top;
+	width: 90px;
+}
+
+#pages-scores-back {
+	left: 10px;
+	position: absolute;
+	top: 5px;
+}
+
+#pages-scores-twitter-backtrack {
+	height: 434px;
+}
+
+#pages-scores-local-backtrack {
+	height: 70px;
+}
+
+
+/*** about page ***/
+#pages-about {
+	height: 530px;
+	padding: 10px;
+	text-align: justify;
+	width: 780px;
+}
+
+#pages-about-back {
+	bottom: 5px;
+	left: 10px;
+	position: absolute;
+}
+
+
+/*** control ***/
+#control {
+	background-color: #DDD;
+	font-size: 10px;
+	height: 44px;
+	margin-top: 500px;
+	padding: 4px 6px 2px 6px;
+	width: 788px;
+}
+
+#control-left {
+	float: left;
+}
+#control-left > div {
+	display: none;
+}
+
+#control-turrets > a {
+	float: left;
+	text-align: center;
+	width: 90px;
+}
+
+#control-manage > a, #control-manage-stats {
+	border: 1px solid #00f;
+	float: left;
+	height: 30px;
+	margin: 5px;
+	text-align: center;
+	width: 75px;
+}
+#control-manage-stats {
+	border-color: #000;
+}
+
+#control-score {
+	position: relative;
+}
+
+#control-right {
+	float: right;
+}
+
+#control-timer, #control-right-2, #control-right-3 {
+	float: left;
+}
+
+#control-timer {
+	height: 42px;
+	width: 10px;
+}
+#control-timer-green {
+	background-color: #97D164;
+	height: 4px;
+}
+#control-timer-blue {
+	background-color: #85ADE6;
+	height: 38px;
+}
+
+#control-right-2 {
+	border: solid #CCC;
+	border-width: 0 1px;
+	margin: 0 10px;
+	min-width: 60px;
+	padding: 0 10px;
+}
