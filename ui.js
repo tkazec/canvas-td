@@ -314,9 +314,9 @@ ui.bind("click", ui.id("pages-start-maps").children, function(){
 
 ui.handletweets = function(data){
 	var maps = {
-		loopy: ui.id("pages-scores-twitter-loopy").appendChild(document.createElement("ul")),
-		backtrack: ui.id("pages-scores-twitter-backtrack").appendChild(document.createElement("ul")),
-		dash: ui.id("pages-scores-twitter-dash").appendChild(document.createElement("ul"))
+		loopy: ui.id("pages-scores-twitter-loopy"),
+		backtrack: ui.id("pages-scores-twitter-backtrack"),
+		dash: ui.id("pages-scores-twitter-dash")
 	};
 	
 	data.results.forEach(function(tweet){
