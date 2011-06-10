@@ -2,7 +2,7 @@ A fully featured tower defense game built with &lt;canvas&gt;. http://tkazec.git
 
 ---
 
-Should work in Chrome (Frame), Safari ≥ 5, Firefox ≥ 3.6, IE ≥ 9, and Opera.
+Should work in Chrome (Frame), Safari ≥ 4, Firefox ≥ 3.5, IE ≥ 9, and Opera.
 
 	<iframe src="http://tkazec.github.com/canvas-td/" width="820" height="580" style="border:none"></iframe>
 

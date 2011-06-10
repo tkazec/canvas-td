@@ -161,6 +161,11 @@ ul {
 	width: 780px;
 }
 
+#pages-about-logo {
+	display: block;
+	margin: 45px auto 0 auto;
+}
+
 #pages-about-back {
 	bottom: 5px;
 	left: 10px;
