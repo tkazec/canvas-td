@@ -1,0 +1,13 @@
+{
+	"name": "Canvas TD",
+	"version": "1.0",
+	"description": "A fully featured tower defense game built with <canvas>.",
+	"icons": {
+		"128": "logo-128.png"
+	},
+	"app": {
+		"launch": {
+			"web_url": "http://canvas-td.tkaz.ec/"
+		}
+	}
+}

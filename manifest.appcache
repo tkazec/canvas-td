@@ -1,0 +1,23 @@
+CACHE MANIFEST
+
+index.html
+http://fonts.googleapis.com/css?family=Droid+Sans+Mono
+index.css
+index.js
+
+favicon.ico
+logo-224.png
+maps/loopy.png
+maps/backtrack.png
+maps/dash.png
+turrets/laser.png
+turrets/missile.png
+turrets/tazer.png
+turrets/mortar.png
+
+legacy.html
+
+NETWORK:
+*
+
+# production only: add manifest="manifest.appcache" to <html> and replace this with modified date

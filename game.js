@@ -190,7 +190,7 @@ var game = this.game = {
 		
 		ui.id("control-score-text").textContent = text;
 		ui.id("control-score-tweet").setAttribute("href",
-			"https://twitter.com/?status=" + window.encodeURIComponent("I scored " + text + " on " + map + " in #canvastd http://tkazec.github.com/canvas-td/"));
+			"https://twitter.com/?status=" + window.encodeURIComponent("I scored " + text + " on " + map + " in #canvastd http://canvas-td.tkaz.ec/"));
 		
 		ui.panel("score");
 		ui.id("pages-overlay").style.display = "block";
