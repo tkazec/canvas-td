@@ -265,10 +265,6 @@ ui.id("control-pause").addEventListener("click", function(){
 	this.innerText = game.paused ? (game.start(), "Pause") : (game.pause(), "Start");
 }, false);
 
-ui.id("control-reset").addEventListener("click", function(){
-	window.confirm("Really reset?") && window.location.reload();
-}, false);
-
 
 /*** init ***/
 ui.bind("click", ui.id("pages-start-maps").children, function(){
