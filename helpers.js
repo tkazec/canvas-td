@@ -44,6 +44,8 @@ this.ui = {
 		if (name) { ui.nav.unshift(name); } else { ui.page(ui.nav[1]); return; }
 		Array.forEach(id("pages").children, function(el){ if (el.id !== "pages-overlay") { el.style.display = "none"; } });
 		id("pages-" + name).style.display = "block";
+		
+		_gaq.push(["_trackPageview", "/" + name]);
 	},
 	panel: function(name){
 		Array.forEach(id("control-left").children, function(el){ el.style.display = "none"; });

@@ -305,7 +305,9 @@ ui.bind("click", ui.id("pages-start-maps").children, function(){
 	
 	game.start();
 	ui.panel("turrets");
-	ui.page("canvas");	
+	ui.page("canvas");
+	
+	_gaq.push(["_trackEvent", "Game", "Start", name]);
 });
 
 ui.handletweets = function(data){
