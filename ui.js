@@ -249,12 +249,12 @@ ui.id("control").addEventListener("click", function(e){
 }, false);
 
 ui.bind("click", ui.id("control-turrets").children, function(e){
-	ui.action.build(this.getAttribute("data-name"));
+	!game.paused && ui.action.build(this.getAttribute("data-name"));
 });
 
 ui.bind("click", ui.id("control-manage").getElementsByTagName("a"), function(e){
 	var action = e.target.id.split("-")[2];
-	(ui.action[action] || ui.action.upgrade)(action);
+	!game.paused && (ui.action[action] || ui.action.upgrade)(action);
 });
 
 ui.id("control-timer").addEventListener("click", function(e){
