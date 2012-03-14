@@ -113,12 +113,12 @@ var game = this.game = {
 				if (--creep.slowfor <= 0) { creep.speed = 1; }
 				
 				var waypoint = game.map[creep.nextpoint],
-					multi = creep.hp / creep._hp,
-					rgb = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? [128, 0, 128] : [255, 140, 0]): [0, 0, 255]) : [255, 0, 0];
+					hue = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? 300 : 33) : 240) : 0,
+					sat = 100 * (creep.hp / creep._hp);
 				
 				Math.move(creep, { x: waypoint.x - 7 + creep.offset, y: waypoint.y - 7 + creep.offset }, creep.speed) && creep.nextpoint++;
 				
-				canvas.fillStyle = "rgb(" + Math.round(rgb[0] * multi) + "," + Math.round(rgb[1] * multi) + "," + Math.round(rgb[2] * multi) + ")";
+				canvas.fillStyle = "hsl(" + hue + "," + sat + "%,50%)";
 				canvas.fillRect(creep.x - 5, creep.y - 5, 10, 10);
 			}
 		});
