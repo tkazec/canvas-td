@@ -6,7 +6,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 a {
 	-moz-user-select: none;
 	-webkit-user-select: none;
-	color: blue;
+	color: #00F;
 	cursor: pointer;
 	text-decoration: none;
 	user-select: none;
@@ -116,7 +116,7 @@ ul {
 	margin: 5px 0;
 	padding: 0 10px;
 	vertical-align: top;
-	width: 245px; /* should be 246px */
+	width: 245px; /* should be 246px? */
 }
 
 #pages-scores > :nth-child(3n+2) {
@@ -197,7 +197,7 @@ ul {
 }
 
 #control-manage > a, #control-manage-stats {
-	border: 1px solid #00f;
+	border: 1px solid #00F;
 	float: left;
 	height: 30px;
 	margin: 5px;
