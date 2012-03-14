@@ -17,5 +17,5 @@ sed -i '' -e '/\.js"><\/script>/d' -e 's/<script src/<script src="index.js"><\/s
 
 yuicompressor -o index.css index.css
 
-closure --language_in ECMASCRIPT5 --js helpers.js --js game.js --js maps/data.js --js turrets/data.js --js ui.js --js_output_file index.js
-rm helpers.js game.js maps/data.js turrets/data.js ui.js
+closure --language_in ECMASCRIPT5 --js js/helpers.js --js js/game.js --js js/maps.js --js js/turrets.js --js js/ui.js --js_output_file index.js
+rm -r js

@@ -1,4 +1,4 @@
-(function () { "use strict";
+(function (Math) { "use strict";
 
 /*** math ***/
 Math.inRadius = function (target, obj, rad) {
@@ -75,4 +75,4 @@ Array.forEach = function (arr, fn) {
 	Array.prototype.forEach.call(arr, fn);
 };
 
-})();
+})(Math);
