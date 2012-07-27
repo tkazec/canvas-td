@@ -20,6 +20,7 @@ Todo:
 * Random map.
 * Canvas TD Sever?
 * Offline?
+* Bug: Turrets being placed (that haven't been bought yet) can be upgraded through keyboard shortcuts. Hilariousness ensues.
 
 ---
 
