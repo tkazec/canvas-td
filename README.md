@@ -18,10 +18,10 @@ Todo:
 * Better icon and promo graphics.
 * Audio.
 * Random map.
-* Canvas TD Sever?
-* Offline?
+* Canvas TD Sever.
+* Offline.
 * Bug: Turrets being placed (that haven't been bought yet) can be upgraded through keyboard shortcuts. Hilariousness ensues.
 
 ---
 
-© 2012 [Teddy Cross](http://tkaz.ec), shared under the [MIT](http://www.opensource.org/licenses/MIT).
+© 2013 [Teddy Cross](http://tkaz.ec), shared under the [MIT License](http://www.opensource.org/licenses/MIT).

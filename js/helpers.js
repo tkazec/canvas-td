@@ -1,12 +1,16 @@
-(function (Math) { "use strict";
+(function () {
 
-/*** math ***/
+///////////////////////////////////////////////////////////////////////////////
+// Math
+///////////////////////////////////////////////////////////////////////////////
 Math.inRadius = function (target, obj, rad) {
 	return (obj.x - target.x)*(obj.x - target.x) + (obj.y - target.y)*(obj.y - target.y) < rad*rad;
 };
 
 Math.move = function (obj, target, speed) {
-	var distx = target.x - obj.x, disty = target.y - obj.y, angle = Math.atan2(disty, distx);
+	var distx = target.x - obj.x;
+	var disty = target.y - obj.y;
+	var angle = Math.atan2(disty, distx);
 	
 	obj.x += speed * Math.cos(angle);
 	obj.y += speed * Math.sin(angle);
@@ -19,7 +23,9 @@ Math.rand = function (max) {
 };
 
 
-/*** elements ***/
+///////////////////////////////////////////////////////////////////////////////
+// Elements
+///////////////////////////////////////////////////////////////////////////////
 function id (ID) {
 	return document.getElementById(ID);
 }
@@ -66,7 +72,9 @@ window.ui = {
 };
 
 
-/*** misc ***/
+///////////////////////////////////////////////////////////////////////////////
+// Misc
+///////////////////////////////////////////////////////////////////////////////
 window.data = {};
 
 window.canvas = ui.id("pages-canvas").getContext("2d");
@@ -75,4 +83,4 @@ Array.forEach = function (arr, fn) {
 	Array.prototype.forEach.call(arr, fn);
 };
 
-})(Math);
+})();
