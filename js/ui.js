@@ -28,14 +28,14 @@ ui.handleshortcuts = function(e){
 				e.shiftKey && game.selection && ui.action.sell(); break;
 			}
 			case 27: {
-				game.selection ? ui.action.deselect() : (game.pause(), (ui.id("control-pause").innerText = "Start")); break;
+				game.selection ? ui.action.deselect() : (game.pause(), (ui.id("control-pause").textContent = "Start")); break;
 			}
 			case 13: {
 				game._wave = game.ticks - 1200; break;
 			}
 		}
 	} else {
-		e.keyCode === 27 && (ui.id("control-pause").innerText = "Pause") && game.start();
+		e.keyCode === 27 && (ui.id("control-pause").textContent = "Pause") && game.start();
 	}
 };
 
@@ -262,7 +262,7 @@ ui.id("control-timer").addEventListener("click", function(e){
 }, false);
 
 ui.id("control-pause").addEventListener("click", function(){
-	this.innerText = game.paused ? (game.start(), "Pause") : (game.pause(), "Start");
+	this.textContent = game.paused ? (game.start(), "Pause") : (game.pause(), "Start");
 }, false);
 
 
