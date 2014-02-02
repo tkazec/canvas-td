@@ -135,7 +135,7 @@ ui.action.upgrade = function (stat) {
 	var level = levels[stat];
 	var cost = Defs.turrets.upgrades[level];
 	
-	if (cost && game.cash - cost >= 0) {
+	if (game.selection.status === "selected" && cost && game.cash - cost >= 0) {
 		levels[stat]++;
 		turret[stat] = turret.upgrades[level][stat];
 		levels.full = levels.damage === 10 && levels.rate === 10 && levels.range === 10;
@@ -147,7 +147,7 @@ ui.action.upgrade = function (stat) {
 };
 
 ui.action.move = function () {
-	if (game.cash - 90 >= 0) {
+	if (game.selection.status === "selected" && game.cash - 90 >= 0) {
 		var turret = game.selection.turret;
 		
 		game.selection = {

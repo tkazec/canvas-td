@@ -12,7 +12,6 @@ Todo:
 * Random map generator.
 * Canvas TD Sever.
 * Offline support.
-* Bug: Turrets being placed (that haven't been bought yet) can be upgraded through keyboard shortcuts. Hilariousness ensues.
 
 ---
 
