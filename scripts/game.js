@@ -102,28 +102,44 @@ var game = {
 		// creeps
 		///////////////////////////////////////////////////////////////////////////////
 		game.creeps.forEach(function (creep, i, a) {
-			var _hp = creep.hp, burning = creep.burning;
-			burning && (creep.hp -= 30);
+			var _hp = creep.hp;
+			var burning = creep.burning;
+			
+			if (burning) {
+				creep.hp -= 30;
+			}
 			
 			if (creep.hp <= 0) {
-				if (_hp > 0) { burning.kills++; }
+				if (_hp > 0) {
+					burning.kills++;
+				}
+				
 				game.kills++;
 				game.cash += creep.cash;
+				
 				delete a[i];
+				
 				ui.action.refresh();
 			} else if (creep.nextpoint === game.map.length) {
 				delete a[i];
 				
 				ui.lives.textContent = --game.lives;
-				game.lives === 0 && game.end();
+				
+				if (!game.lives) {
+					game.end();
+				}
 			} else {
-				if (--creep.slowfor <= 0) { creep.speed = 1; }
+				if (--creep.slowfor <= 0) {
+					creep.speed = 1;
+				}
 				
 				var waypoint = game.map[creep.nextpoint];
 				var hue = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? 300 : 33) : 240) : 0;
 				var sat = 100 * (creep.hp / creep._hp);
 				
-				Math.move(creep, { x: waypoint.x - 7 + creep.offset, y: waypoint.y - 7 + creep.offset }, creep.speed) && creep.nextpoint++;
+				if (Math.move(creep, { x: waypoint.x - 7 + creep.offset, y: waypoint.y - 7 + creep.offset }, creep.speed)) {
+					creep.nextpoint++;
+				}
 				
 				canvas.fillStyle = "hsl(" + hue + "," + sat + "%,50%)";
 				canvas.fillRect(creep.x - 5, creep.y - 5, 10, 10);

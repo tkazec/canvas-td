@@ -171,7 +171,7 @@ ui.action.move = function () {
 };
 
 ui.action.sell = function () {
-	var turret = game.selection.turret, value = Math.round(turret.cost * .7);
+	var turret = game.selection.turret, value = Math.round(turret.cost * 0.7);
 	game.cash += value;
 	game.spent -= value;
 	
@@ -200,7 +200,7 @@ ui.action.refresh = function () {
 			$("control-manage-" + id).innerHTML = proper + " (" + level + ")<br>" + (cost && "$" + cost);
 		});
 		
-		$("control-manage-sell").innerHTML = "Sell<br>$" + Math.round(turret.cost * .7);
+		$("control-manage-sell").innerHTML = "Sell<br>$" + Math.round(turret.cost * 0.7);
 		
 		$("control-manage-stats").innerHTML = turret.kills + " kills<br>" + (((turret.kills / game.kills) || 0) * 100).toFixed(2)  + "% of &sum;";
 	}
@@ -364,8 +364,10 @@ ui.bind("click", $("pages-start-maps").children, function (evt) {
 			cur.x += dx < 0 ? 21 : -16;
 			var m = dy / dx, b = cur.y - m*cur.x;
 			dx = dx < 0 ? -1 : 1;
+			
 			while (cur.x !== next.x) {
 				cur.x += dx;
+				
 				for (var i = -3; i <= 4; i++) {
 					game.tiles[Math.round(cur.x / 5) + "," + ((Math.round(m*cur.x + b) / 5) + i)] = true;
 				}
@@ -374,8 +376,10 @@ ui.bind("click", $("pages-start-maps").children, function (evt) {
 			cur.y += dy < 0 ? 21 : -16;
 			var m = dx / dy, b = cur.x - m*cur.y;
 			dy = dy < 0 ? -1 : 1;
-			while (cur.y != next.y) {
+			
+			while (cur.y !== next.y) {
 				cur.y += dy;
+				
 				for (var i = -3; i <= 4; i++) {
 					game.tiles[((Math.round(m*cur.y + b) / 5) + i) + "," + Math.round(cur.y / 5)] = true;
 				}

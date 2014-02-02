@@ -68,7 +68,9 @@ Defs.turrets.Laser = {
 		var _hp = creep.hp;
 		var turret = this;
 		
-		(creep.hp -= turret.damage) <= 0 && _hp > 0 && turret.kills++;
+		if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
+			turret.kills++;
+		}
 		
 		if (turret.levels.full && Math.rand(9) === 0) {
 			var start = game.map[0];
@@ -110,12 +112,13 @@ Defs.turrets.Missile = {
 	shoot: function (creeps) {
 		var creep = creeps[Math.rand(creeps.length - 1)];
 		var cell = this.cell % 4;
-		var missile = { x: this.x + (cell % 2 === 0 ? -5 : 5), y: this.y + (cell < 2 ? -5 : 5) }
+		var missile = { x: this.x + (cell % 2 === 0 ? -5 : 5), y: this.y + (cell < 2 ? -5 : 5) };
 		var turret = this;
 		
 		game.run.push({ what: function () {
 			if (creep.hp <= 0) {
 				var creeps = game.creeps.filter(function () { return true; });
+				
 				if (creeps.length) {
 					creep = creeps[Math.rand(creeps.length - 1)];
 				} else {
@@ -128,9 +131,12 @@ Defs.turrets.Missile = {
 					game.creeps.forEach(function (c) {
 						if (Math.inRadius(creep, c, 20)) {
 							var _hp = c.hp;
-							(c.hp -= turret.damage) <= 0 && _hp > 0 && turret.kills++;
+							if ((c.hp -= turret.damage) <= 0 && _hp > 0) {
+								turret.kills++;
+							}
 						}
 					});
+					
 					game.run.push({ what: function () {
 						canvas.fillStyle = "#FF0";
 						canvas.beginPath();
@@ -140,8 +146,11 @@ Defs.turrets.Missile = {
 					}, until: 3 });
 				} else {
 					var _hp = creep.hp;
-					(creep.hp -= turret.damage) <= 0 && _hp > 0 && turret.kills++;
+					if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
+						turret.kills++;
+					}
 				}
+				
 				return false;
 			} else {
 				canvas.fillStyle = "#FFF";
@@ -177,7 +186,10 @@ Defs.turrets.Tazer = {
 		var speed = 0.9 - (turret.damage / 1000);
 		var slowfor = 60 + turret.damage;
 		
-		(creep.hp -= turret.damage) <= 0 && _hp > 0 && turret.kills++;
+		if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
+			turret.kills++;
+		}
+		
 		creep.speed = creep.speed > speed ? speed : creep.speed;
 		creep.slowfor = turret.levels.full ? Infinity : (creep.slowfor < slowfor ? slowfor : creep.slowfor);
 		
@@ -228,8 +240,14 @@ Defs.turrets.Mortar = {
 				game.creeps.forEach(function (creep) {
 					if (Math.inRadius(creep, target, radius)) {
 						var _hp = creep.hp;
-						(creep.hp -= turret.damage) <= 0 && _hp > 0 && turret.kills++;
-						if (turret.levels.full && !creep.burning) { creep.burning = turret; }
+						
+						if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
+							turret.kills++;
+						}
+						
+						if (turret.levels.full && !creep.burning) {
+							creep.burning = turret;
+						}
 					}
 				});
 				
