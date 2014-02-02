@@ -52,15 +52,15 @@ ui.handleshortcuts = function (evt) {
 				}
 				break;
 			}
+			case 187: {
+				$("control-fast").click();
+				break;
+			}
 			case 27: {
 				if (game.selection) {
 					ui.action.deselect();
 				} else {
-					if (evt.shiftKey) {
-						$("control-fast").click();
-					} else {
-						$("control-pause").click();
-					}
+					$("control-pause").click();
 				}
 				break;
 			}
