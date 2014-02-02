@@ -1,5 +1,3 @@
-(function () {
-
 ///////////////////////////////////////////////////////////////////////////////
 // Math
 ///////////////////////////////////////////////////////////////////////////////
@@ -26,24 +24,23 @@ Math.rand = function (max) {
 ///////////////////////////////////////////////////////////////////////////////
 // Elements
 ///////////////////////////////////////////////////////////////////////////////
-function id (ID) {
-	return document.getElementById(ID);
-}
+var $ = function (id) {
+	return document.getElementById(id);
+};
 
 window.ui = {
-	timer: id("control-timer-blue"),
-	cash: id("control-cash"),
-	lives: id("control-lives"),
-	wave: id("control-wave"),
-	fps: id("control-fps"),
+	timer: $("control-timer-blue"),
+	cash: $("control-cash"),
+	lives: $("control-lives"),
+	wave: $("control-wave"),
+	fps: $("control-fps"),
 	
 	nav: ["start"],
 	action: {},
 	
-	id: id,
-	bind: function (event, elems, fn) {
-		Array.forEach(elems, function (el) {
-			el.addEventListener(event, fn, false);
+	bind: function (evt, elems, fn) {
+		Array.prototype.slice.call(elems).forEach(function (elem) {
+			elem.addEventListener(evt, fn, false);
 		});
 	},
 	page: function (name) {
@@ -54,33 +51,21 @@ window.ui = {
 			return;
 		}
 		
-		Array.forEach(id("pages").children, function (el) {
-			if (el.id !== "pages-overlay") {
-				el.style.display = "none";
+		Array.prototype.slice.call($("pages").children).forEach(function (elem) {
+			if (elem.id !== "pages-overlay") {
+				elem.style.display = "none";
 			}
 		});
-		id("pages-" + name).style.display = "block";
+		
+		$("pages-" + name).style.display = "block";
 		
 		_gaq.push(["_trackPageview", "/" + name]);
 	},
 	panel: function (name) {
-		Array.forEach(id("control-left").children, function (el) {
-			el.style.display = "none";
+		Array.prototype.slice.call($("control-left").children).forEach(function (elem) {
+			elem.style.display = "none";
 		});
-		id("control-" + name).style.display = "block";
+
+		$("control-" + name).style.display = "block";
 	}
 };
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Misc
-///////////////////////////////////////////////////////////////////////////////
-window.data = {};
-
-window.canvas = ui.id("pages-canvas").getContext("2d");
-
-Array.forEach = function (arr, fn) {
-	Array.prototype.forEach.call(arr, fn);
-};
-
-})();

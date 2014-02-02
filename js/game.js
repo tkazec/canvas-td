@@ -1,6 +1,4 @@
-(function(canvas, ui, Math){
-
-var game = this.game = {
+var game = {
 	ticks: 0,
 	_ticks: 0,
 	_tick: 0,
@@ -24,15 +22,17 @@ var game = this.game = {
 	
 	tiles: {},
 	
-	get cash(){
+	get cash () {
 		return game._cash;
 	},
-	set cash(v){
+	set cash (v) {
 		ui.cash.textContent = game._cash = v;
 	},
 	
-	tick: function(){
-		/*** fps ***/
+	tick: function () {
+		///////////////////////////////////////////////////////////////////////////////
+		// fps
+		///////////////////////////////////////////////////////////////////////////////
 		if (game.ticks - game._ticks === 60) {
 			ui.fps.textContent = Math.round(60000 / (Date.now() - game._tick));
 			game._tick = Date.now();
@@ -40,7 +40,9 @@ var game = this.game = {
 		}
 		
 		
-		/*** wave ***/
+		///////////////////////////////////////////////////////////////////////////////
+		// wave
+		///////////////////////////////////////////////////////////////////////////////
 		if ((game.ticks - game._wave) % 60 === 59) {
 			ui.timer.style.height = 40 + (((game._wave - game.ticks - 1) / 60) * 2) + "px";
 		}
@@ -70,7 +72,9 @@ var game = this.game = {
 		}
 		
 		
-		/*** map ***/
+		///////////////////////////////////////////////////////////////////////////////
+		// map
+		///////////////////////////////////////////////////////////////////////////////
 		canvas.fillStyle = "#000";
 		canvas.fillRect(0, 0, 800, 500);
 		
@@ -79,7 +83,7 @@ var game = this.game = {
 		canvas.strokeStyle = "#00F";
 		canvas.beginPath();
 		canvas.moveTo(start.x, start.y);
-		map.forEach(function(cur, i){
+		map.forEach(function (cur, i) {
 			canvas.lineTo(cur.x, cur.y);
 		});
 		canvas.stroke();
@@ -87,14 +91,16 @@ var game = this.game = {
 		canvas.strokeStyle = "#004";
 		canvas.beginPath();
 		canvas.moveTo(start.x, start.y);
-		map.forEach(function(cur, i){
+		map.forEach(function (cur, i) {
 			canvas.lineTo(cur.x, cur.y);
 		});
 		canvas.stroke();
 		
 		
-		/*** creeps ***/
-		game.creeps.forEach(function(creep, i, a){
+		///////////////////////////////////////////////////////////////////////////////
+		// creeps
+		///////////////////////////////////////////////////////////////////////////////
+		game.creeps.forEach(function (creep, i, a) {
 			var _hp = creep.hp, burning = creep.burning;
 			burning && (creep.hp -= 30);
 			
@@ -112,9 +118,9 @@ var game = this.game = {
 			} else {
 				if (--creep.slowfor <= 0) { creep.speed = 1; }
 				
-				var waypoint = game.map[creep.nextpoint],
-					hue = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? 300 : 33) : 240) : 0,
-					sat = 100 * (creep.hp / creep._hp);
+				var waypoint = game.map[creep.nextpoint];
+				var hue = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? 300 : 33) : 240) : 0;
+				var sat = 100 * (creep.hp / creep._hp);
 				
 				Math.move(creep, { x: waypoint.x - 7 + creep.offset, y: waypoint.y - 7 + creep.offset }, creep.speed) && creep.nextpoint++;
 				
@@ -124,10 +130,15 @@ var game = this.game = {
 		});
 		
 		
-		/*** turrets ***/
-		game.turrets.forEach(function(turret){
+		///////////////////////////////////////////////////////////////////////////////
+		// turrets
+		///////////////////////////////////////////////////////////////////////////////
+		game.turrets.forEach(function (turret) {
 			if (turret.lastshot + turret.rate <= game.ticks) {
-				var creeps = game.creeps.filter(function(creep){ return Math.inRadius(creep, turret, turret.range); });
+				var creeps = game.creeps.filter(function (creep) {
+					return Math.inRadius(creep, turret, turret.range);
+				});
+				
 				if (creeps.length > 0) {
 					turret.shoot(creeps);
 					turret.lastshot = game.ticks;
@@ -136,7 +147,9 @@ var game = this.game = {
 			
 			canvas.drawImage(turret.img, turret.x - 12.5, turret.y - 12.5);
 		});
-		var selection = game.selection, turret = selection.turret;
+		
+		var selection = game.selection;
+		var turret = selection.turret;
 		if (selection) {
 			canvas.beginPath();
 			canvas.fillStyle = selection.status === "selected" || selection.placeable ? "rgba(255, 255, 255, .3)" : "rgba(255, 0, 0, .3)";
@@ -147,8 +160,10 @@ var game = this.game = {
 		}
 		
 		
-		/*** finish ***/
-		game.run.forEach(function(something, i, a){
+		///////////////////////////////////////////////////////////////////////////////
+		// finish
+		///////////////////////////////////////////////////////////////////////////////
+		game.run.forEach(function (something, i, a) {
 			if (something.what() === false || --something.until === 0) {
 				delete a[i];
 			}
@@ -156,44 +171,44 @@ var game = this.game = {
 		
 		game.ticks++;
 	},
-	start: function(){
+	start: function () {
 		game._ticks = game.ticks;
 		game._tick = Date.now();
 		game.ticker = window.setInterval(game.tick, 1000 / 60);
 		game.paused = false;
 		game.tick();
 	},
-	pause: function(){
+	pause: function () {
 		window.clearInterval(game.ticker);
 		game.paused = true;
 	},
-	end: function(){
+	end: function () {
 		game.pause();
 		document.removeEventListener("keydown", ui.handleshortcuts, false);
 		window.removeEventListener("beforeunload", ui.handleunload, false);
 		
-		var map = game.map.name,
-			kills = game.kills,
-			spent = game.spent,
-			score = kills * spent,
-			text = score + " (" + kills + " kills, $" + spent + " spent)",
-			top = JSON.parse(localStorage.scores || '{"Loopy":[],"Backtrack":[],"Dash":[]}'),
-			topmap = top[map];
+		var map = game.map.name;
+		var kills = game.kills;
+		var spent = game.spent;
+		var score = kills * spent;
+		var text = score + " (" + kills + " kills, $" + spent + " spent)";
+		var top = JSON.parse(localStorage.scores || '{"Loopy":[],"Backtrack":[],"Dash":[]}');
+		var topmap = top[map];
 		
 		if (score > (topmap.length === 5 && topmap[4].score)) {
 			topmap.splice(4, 1);
 			topmap.push({ score: score, kills: kills, spent: spent, date: Date.now() });
-			topmap.sort(function(a, b){ return b.score - a.score; });
+			topmap.sort(function (a, b) { return b.score - a.score; });
 			localStorage.scores = JSON.stringify(top);
 			ui.action.scores();
 		}
 		
-		ui.id("control-score-text").textContent = text;
-		ui.id("control-score-tweet").setAttribute("href",
+		$("control-score-text").textContent = text;
+		$("control-score-tweet").setAttribute("href",
 			"https://twitter.com/?status=" + window.encodeURIComponent("I scored " + text + " on " + map + " in #canvastd http://canvas-td.tkaz.ec/"));
 		
 		ui.panel("score");
-		ui.id("pages-overlay").style.display = "block";
+		$("pages-overlay").style.display = "block";
 		
 		_gaq.push(["_trackEvent", "Game", "End", map]);
 		_gaq.push(["_trackEvent", "Game", "Creeps killed", map, kills]);
@@ -203,5 +218,3 @@ var game = this.game = {
 		_gaq.push(["_trackEvent", "Game", "Last FPS", map, Number(ui.fps.textContent)]);
 	}
 };
-
-})(canvas, ui, Math);

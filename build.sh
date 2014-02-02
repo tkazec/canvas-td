@@ -3,19 +3,21 @@
 
 SRCDIR="$( cd "$( dirname "$0" )" && pwd )"
 OUTDIR=$1
-GA=$2
+GAID=$2
 
 rm -rf $OUTDIR
 cp -R $SRCDIR $OUTDIR
 cd $OUTDIR
 
-rm build.sh
-rm -rf .git
+mv images/favicon.ico favicon.ico
 
-sed -i '' -e "s/##GA##/$GA/" index.html
+sed -i '' -e "s/##GAID##/$GAID/" index.html
 sed -i '' -e '/\.js"><\/script>/d' -e 's/<script src/<script src="index.js"><\/script>&/' index.html
 
 yuicompressor -o index.css index.css
 
-closure-compiler --language_in ECMASCRIPT5 --js js/helpers.js --js js/game.js --js js/maps.js --js js/turrets.js --js js/ui.js --js_output_file index.js
-rm -r js
+closure-compiler --language_in ECMASCRIPT5 --js scripts/utils.js --js scripts/defs.js --js scripts/game.js --js scripts/ui.js --js_output_file index.js
+
+rm -rf .git
+rm -r scripts
+rm build.sh
