@@ -4,6 +4,7 @@ var game = {
 	_tick: 0,
 	ticker: -1,
 	run: [],
+	fast: false,
 	paused: true,
 	
 	wave: 0,
@@ -43,8 +44,8 @@ var game = {
 		///////////////////////////////////////////////////////////////////////////////
 		// wave
 		///////////////////////////////////////////////////////////////////////////////
-		if ((game.ticks - game._wave) % 60 === 59) {
-			ui.timer.style.height = 40 + (((game._wave - game.ticks - 1) / 60) * 2) + "px";
+		if ((game.ticks - game._wave) % 30 === 29) {
+			ui.timer.style.opacity = 1 - (((game.ticks - game._wave) / 60) * 0.05);
 		}
 		
 		if (game._wave + 1200 === game.ticks) {
@@ -174,7 +175,7 @@ var game = {
 	start: function () {
 		game._ticks = game.ticks;
 		game._tick = Date.now();
-		game.ticker = window.setInterval(game.tick, 1000 / 60);
+		game.ticker = window.setInterval(game.tick, 1000 / (game.fast ? 180 : 60));
 		game.paused = false;
 		game.tick();
 	},

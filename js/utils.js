@@ -29,7 +29,7 @@ var $ = function (id) {
 };
 
 window.ui = {
-	timer: $("control-timer-blue"),
+	timer: $("control-timer"),
 	cash: $("control-cash"),
 	lives: $("control-lives"),
 	wave: $("control-wave"),

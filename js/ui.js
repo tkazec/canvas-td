@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 document.addEventListener("dragstart", function (evt) {
 	if (evt.target.tagName === "IMG") {
-		e.preventDefault();
+		evt.preventDefault();
 	}
 }, false);
 
@@ -47,7 +47,7 @@ ui.handleshortcuts = function (evt) {
 				break;
 			}
 			case 56: {
-				if (e.shiftKey && game.selection) {
+				if (evt.shiftKey && game.selection) {
 					ui.action.sell();
 				}
 				break;
@@ -56,8 +56,11 @@ ui.handleshortcuts = function (evt) {
 				if (game.selection) {
 					ui.action.deselect();
 				} else {
-					game.pause();
-					$("control-pause").textContent = "Start";
+					if (evt.shiftKey) {
+						$("control-fast").click();
+					} else {
+						$("control-pause").click();
+					}
 				}
 				break;
 			}
@@ -68,8 +71,7 @@ ui.handleshortcuts = function (evt) {
 		}
 	} else {
 		if (evt.keyCode === 27) {
-			$("control-pause").textContent = "Pause";
-			game.start();
+			$("control-pause").click();
 		}
 	}
 };
@@ -329,6 +331,14 @@ ui.bind("click", $("control-manage").getElementsByTagName("a"), function (evt) {
 $("control-timer").addEventListener("click", function (evt) {
 	if (!game.paused) {
 		game._wave = game.ticks - 1200;
+	}
+}, false);
+
+$("control-fast").addEventListener("click", function (evt) {
+	if (!game.paused) {
+		this.style.backgroundColor = (game.fast = !game.fast) ? "#97D164" : "#85ADE6";
+		game.pause();
+		game.start();
 	}
 }, false);
 

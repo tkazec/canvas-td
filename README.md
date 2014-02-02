@@ -4,7 +4,6 @@ A fully featured tower defense game built with &lt;canvas&gt;. http://canvas-td.
 
 Todo:
 
-* More responsive wave bar.
 * Redo turret targeting.
 * Confirm selling turrets.
 * Optimize collision detection/tiling, e.g. only check edges, + more.
