@@ -185,9 +185,12 @@ ui.action.sell = function () {
 	ui.panel("turrets");
 	game.selection = false;
 	delete game.turrets[turret.id];
+	ui.action.refresh();
 };
 
 ui.action.refresh = function () {
+	ui.cash.textContent = game.cash;
+	
 	if (game.selection) {
 		var turret = game.selection.turret;
 		var levels = turret.levels;
@@ -275,6 +278,7 @@ $("pages-canvas").addEventListener("click", function (evt) {
 			
 			ui.panel("turrets");
 			game.selection = false;
+			ui.action.refresh();
 		}
 	} else if (selection.status === "placing") {
 		if (selection.placeable) {
@@ -290,6 +294,7 @@ $("pages-canvas").addEventListener("click", function (evt) {
 			}
 			
 			game.selection = false;
+			ui.action.refresh();
 		}
 	} else if (typeof tile === "object") {
 		game.selection = {

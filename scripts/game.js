@@ -18,17 +18,10 @@ var game = {
 	turrets: [],
 	spent: 0,
 	kills: 0,
-	_cash: 35,
+	cash: 35,
 	selection: false,
 	
 	tiles: {},
-	
-	get cash () {
-		return game._cash;
-	},
-	set cash (v) {
-		ui.cash.textContent = game._cash = v;
-	},
 	
 	tick: function () {
 		///////////////////////////////////////////////////////////////////////////////
