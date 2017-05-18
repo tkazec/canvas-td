@@ -1,18 +1,5 @@
-A fully featured tower defense game built with &lt;canvas&gt;. http://canvas-td.tkaz.ec
+A fully featured tower defense game built with &lt;canvas&gt;. https://canvas-td.teddy.io
 
 ---
 
-Todo:
-
-* Redo turret targeting.
-* Confirm selling turrets.
-* Optimize collision detection/tiling, e.g. only check edges, + more.
-* Better icon and promo graphics.
-* Audio effects.
-* Random map generator.
-* Canvas TD Sever.
-* Offline support.
-
----
-
-© 2014 [Teddy Cross](http://tkaz.ec), shared under the [MIT License](http://www.opensource.org/licenses/MIT).
+© 2017 [Teddy Cross](https://teddy.io), shared under the [MIT license](https://opensource.org/licenses/MIT).
