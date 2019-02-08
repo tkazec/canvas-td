@@ -10,7 +10,7 @@ var game = {
 	wave: 0,
 	_wave: 0,
 	
-	creeps: [],
+	creeps: new QuadTree(400, 250, 800, 500, 1),
 	hp: 1,
 	hpinc: 1.3,
 	lives: 10,
@@ -48,7 +48,7 @@ var game = {
 			game.hp *= game.hpinc;
 			
 			for (var i = 1; i <= 10; i++) {
-				game.creeps.push({
+				game.creeps.add({
 					x: -(i * 20) - 10,
 					y: game.map[0].y,
 					offset: Math.rand(14),
@@ -94,7 +94,7 @@ var game = {
 		///////////////////////////////////////////////////////////////////////////////
 		// creeps
 		///////////////////////////////////////////////////////////////////////////////
-		game.creeps.forEach(function (creep, i, a) {
+		game.creeps.forEach(function (creep) {
 			var _hp = creep.hp;
 			var burning = creep.burning;
 			
@@ -109,12 +109,12 @@ var game = {
 				
 				game.kills++;
 				game.cash += creep.cash;
-				
-				delete a[i];
+
+				game.creeps.delete(creep);
 				
 				ui.action.refresh();
 			} else if (creep.nextpoint === game.map.length) {
-				delete a[i];
+				game.creeps.delete(creep);
 				
 				ui.lives.textContent = --game.lives;
 				
@@ -130,9 +130,11 @@ var game = {
 				var hue = (creep.speed < 1 || burning) ? (burning ? (creep.speed < 1 ? 300 : 33) : 240) : 0;
 				var sat = 100 * (creep.hp / creep._hp);
 				
+				game.creeps.delete(creep);
 				if (Math.move(creep, { x: waypoint.x - 7 + creep.offset, y: waypoint.y - 7 + creep.offset }, creep.speed)) {
 					creep.nextpoint++;
 				}
+				game.creeps.add(creep);
 				
 				canvas.fillStyle = "hsl(" + hue + "," + sat + "%,50%)";
 				canvas.fillRect(creep.x - 5, creep.y - 5, 10, 10);
@@ -145,9 +147,7 @@ var game = {
 		///////////////////////////////////////////////////////////////////////////////
 		game.turrets.forEach(function (turret) {
 			if (turret.lastshot + turret.rate <= game.ticks) {
-				var creeps = game.creeps.filter(function (creep) {
-					return Math.inRadius(creep, turret, turret.range);
-				});
+				var creeps = game.creeps.inRadius(turret.x, turret.y, turret.range);
 				
 				if (creeps.length > 0) {
 					turret.shoot(creeps);
