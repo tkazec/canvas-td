@@ -20,6 +20,28 @@ Math.rand = function (max) {
 	return Math.floor(Math.random() * (max + 1));
 };
 
+/*
+ * An array-like data structure
+ *
+ * Does not accumulate undefined entries after a large number of push and delete
+ * operations.
+ */
+function RunQueue() {
+	this.length = 0;
+};
+
+RunQueue.prototype.push = function(elem) {
+	this[this.length++] = elem;
+};
+
+RunQueue.prototype.forEach = function(f) {
+	var self = this;
+	Object.keys(self).filter(function(k) {
+		return k !== "length";
+	}).forEach(function(k) {
+		f(self[k], k, self);
+	});
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Elements

@@ -3,7 +3,7 @@ var game = {
 	_ticks: 0,
 	_tick: 0,
 	ticker: -1,
-	run: [],
+	run: new RunQueue(),
 	fast: false,
 	paused: true,
 	
