@@ -74,9 +74,11 @@ Defs.turrets.Laser = {
 		
 		if (turret.levels.full && Math.rand(9) === 0) {
 			var start = game.map[0];
+			game.creeps.delete(creep);
 			creep.x = start.x;
 			creep.y = start.y;
 			creep.nextpoint = 0;
+			game.creeps.add(creep);
 		}
 		
 		game.run.push({ what: function () {
@@ -117,10 +119,8 @@ Defs.turrets.Missile = {
 		
 		game.run.push({ what: function () {
 			if (creep.hp <= 0) {
-				var creeps = game.creeps.filter(function () { return true; });
-				
-				if (creeps.length) {
-					creep = creeps[Math.rand(creeps.length - 1)];
+				if (creeps.size) {
+					creep = creeps.random();
 				} else {
 					return false;
 				}
@@ -128,12 +128,10 @@ Defs.turrets.Missile = {
 			
 			if (Math.move(missile, creep, 3)) {
 				if (turret.levels.full) {
-					game.creeps.forEach(function (c) {
-						if (Math.inRadius(creep, c, 20)) {
-							var _hp = c.hp;
-							if ((c.hp -= turret.damage) <= 0 && _hp > 0) {
-								turret.kills++;
-							}
+					game.creeps.inRadius(creep.x, creep.y, 20).forEach(function (c) {
+						var _hp = c.hp;
+						if ((c.hp -= turret.damage) <= 0 && _hp > 0) {
+							turret.kills++;
 						}
 					});
 					
@@ -237,17 +235,15 @@ Defs.turrets.Mortar = {
 		
 		game.run.push({ what: function () {
 			if (Math.move(shell, target, 1.5)) {
-				game.creeps.forEach(function (creep) {
-					if (Math.inRadius(creep, target, radius)) {
-						var _hp = creep.hp;
+				game.creeps.inRadius(target.x, target.y, radius).forEach(function (creep) {
+					var _hp = creep.hp;
 						
-						if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
-							turret.kills++;
-						}
+					if ((creep.hp -= turret.damage) <= 0 && _hp > 0) {
+						turret.kills++;
+					}
 						
-						if (turret.levels.full && !creep.burning) {
-							creep.burning = turret;
-						}
+					if (turret.levels.full && !creep.burning) {
+						creep.burning = turret;
 					}
 				});
 				
